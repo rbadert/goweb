@@ -2,5 +2,14 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/github.com/iris-contrib/httpexpect" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/github.com/kataras/golog" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/github.com/kataras/iris" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/github.com/kataras/pio" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/github.com/onsi/ginkgo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/github.com/onsi/gomega" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/golang.org/x/net" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/golang.org/x/text" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/gopkg.in/yaml.v2" vcs="Git" />
   </component>
 </project>

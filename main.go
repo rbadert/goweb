@@ -5,6 +5,7 @@ import (
 	"github.com/kataras/iris/context"
 	"github.com/kataras/iris/middleware/logger"
 	"github.com/kataras/iris/middleware/recover"
+	"os"
 )
 
 func main() {
@@ -13,7 +14,7 @@ func main() {
 	// that can recover from any http-relative panics
 	// and log the requests to the terminal.
 	app.Use(recover.New())
-	//app.Use(logger.New())
+	//web.Use(logger.New())
 	customLogger := logger.New(logger.Config{
 		// Status displays status code
 		Status: true,
@@ -30,18 +31,19 @@ func main() {
 	})
 
 	app.Use(customLogger)
-	// load templaes
-	app.RegisterView(iris.HTML("./app/views", ".html").Reload(true))
+	app.StaticWeb("/node_modules", "./web/node_modules")
+	// load templates
+	app.RegisterView(iris.HTML("./web", ".html").Reload(true))
 
 	// Method:   GET
 	// Resource: http://localhost:8080/
 	app.Handle("GET", "/", func(ctx context.Context) {
-		ctx.ViewData("message", "My Message")
+		ctx.ViewData("message", "The message from go web.")
 		//ctx.HTML("<b>Welcome!</b>")
-		ctx.View("hello.html")
+		ctx.View("views/index.html")
 	})
 
-	// same as app.Handle("GET", "/ping", [...])
+	// same as web.Handle("GET", "/ping", [...])
 	// Method:   GET
 	// Resource: http://localhost:8080/ping
 	app.Get("/ping", func(ctx context.Context) {
@@ -49,7 +51,7 @@ func main() {
 	})
 
 	// Method:   GET
-	// Resource: http://localhost:8080/hello
+	// Resource: http://<server>/hello
 	app.Get("/hello", func(ctx context.Context) {
 		ctx.JSON(context.Map{"message": "Hello iris web framework."})
 	})
@@ -63,5 +65,6 @@ func main() {
 	// http://localhost:8080
 	// http://localhost:8080/ping
 	// http://localhost:8080/hello
-	app.Run(iris.Addr(":8081"), iris.WithoutServerError(iris.ErrServerClosed))
+	var port string = os.Getenv("portnumber");
+	app.Run(iris.Addr(":"+port), iris.WithoutServerError(iris.ErrServerClosed))
 }
